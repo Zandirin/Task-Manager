@@ -42,8 +42,8 @@ def delete_category(category_id):
     return redirect(url_for("categories"))
 
 
-@app.route("/add_category", methods=["GET", "POST"])
-def add_category():
+@app.route("/add_task", methods=["GET", "POST"])
+def add_task():
     categories = Category.query.order_by(Category.category_name).all()
     if request.method == "POST":
         task = Task(
@@ -55,5 +55,5 @@ def add_category():
         )
         db.session.add(task)
         db.session.commit()
-        return redirect(url_for("categories"))
-    return render_template("add_category.html")
+        return redirect(url_for("home"))
+    return render_template("add_task.html", categories=categories)
